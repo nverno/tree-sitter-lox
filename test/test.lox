@@ -1,0 +1,15 @@
+class Foo {
+  init(a, b) {
+    this.a = a;
+    this.b = b;
+  }
+}
+
+{
+  // A dangling else binds to the right-most if => "good"
+  if (true)
+    if (false)
+      print "bad";
+    else
+      print "good";
+}

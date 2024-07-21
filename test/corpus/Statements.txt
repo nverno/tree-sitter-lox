@@ -1,0 +1,177 @@
+============================================
+For statement
+============================================
+
+for (var i = 0; i < 1; i = i + 1) {
+  print i;
+  var i = -1;
+  print i;
+}
+
+---
+
+(program
+ (for_statement
+  (for_clause
+    initializer: (variable_declaration
+      name: (identifier)
+      value: (number))
+    condition: (binary_expression
+      left: (identifier)
+      right: (number))
+    update: (binary_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (identifier)
+        right: (number))))
+   body: (compound_statement
+          (print_statement
+           (identifier))
+          (variable_declaration
+            name: (identifier)
+            value: (number))
+          (print_statement
+           (identifier)))))
+
+============================================
+For statement with empty initializers
+============================================
+
+for (;;) return "yup";
+
+---
+
+(program
+ (for_statement
+  (for_clause)
+   body: (return_statement
+          (string))))
+
+============================================
+For statement no clauses
+============================================
+
+for (;;) return "yup";
+
+---
+
+(program
+ (for_statement
+  (for_clause)
+   body: (return_statement
+          (string))))
+
+============================================
+For statement no initializer
+============================================
+
+for (; i < 2; i = i + 1) print i;
+
+---
+
+(program
+ (for_statement
+  (for_clause
+    condition: (binary_expression
+      left: (identifier)
+      right: (number))
+    update: (binary_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (identifier)
+        right: (number))))
+   body: (print_statement
+          (identifier))))
+
+============================================
+For statement no condition
+============================================
+
+for (var i = 0;; i = i + 1) { print i; }
+
+---
+
+(program
+ (for_statement
+  (for_clause
+    initializer: (variable_declaration
+      name: (identifier)
+      value: (number))
+    update: (binary_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (identifier)
+        right: (number))))
+   body: (compound_statement
+          (print_statement
+           (identifier)))))
+
+============================================
+For statement no update
+============================================
+
+for (var i = 0; i < 2;) {}
+
+---
+
+(program
+ (for_statement
+  (for_clause
+    initializer: (variable_declaration
+      name: (identifier)
+      value: (number))
+    condition: (binary_expression
+      left: (identifier)
+      right: (number)))
+   body: (compound_statement)))
+
+============================================
+For statement with statement body
+============================================
+
+for (; false;) if (true) 1; else 2;
+
+---
+
+(program
+ (for_statement
+  (for_clause
+    condition: (false))
+   body: (if_statement
+     condition:
+      (parenthesized_expression
+       (true))
+     consequence:
+      (expression_statement
+       (number))
+     alternative:
+      (else_clause
+       (expression_statement
+        (number))))))
+
+============================================
+If statement with dangling else
+============================================
+
+// A dangling else binds to the right-most if => "good"
+if (true)
+  if (false)
+    print "bad";
+  else
+    print "good";
+
+---
+
+(program
+  (comment)
+  (if_statement
+    condition: (parenthesized_expression
+      (true))
+    consequence: (if_statement
+      condition: (parenthesized_expression
+        (false))
+      consequence: (print_statement
+        (string))
+      alternative: (else_clause
+        (print_statement
+          (string))))))

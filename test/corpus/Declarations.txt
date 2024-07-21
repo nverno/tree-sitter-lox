@@ -1,0 +1,181 @@
+============================================
+Variable declaration
+============================================
+
+var benedict = Brunch("ham", "English muffin");
+
+---
+
+(program
+  (variable_declaration
+    name: (identifier)
+    value: (call_expression
+      function: (identifier)
+      arguments: (argument_list
+        (string)
+        (string)))))
+
+
+============================================
+Function declaration
+============================================
+
+fun f() {
+  while (true) {
+    var i = "i";
+    fun g() { print i; }
+    return g;
+  }
+}
+
+---
+
+(program
+ (function_declaration
+   name: (identifier)
+   parameters: (parameter_list)
+   body:
+    (compound_statement
+     (while_statement
+       condition: (parenthesized_expression
+                   (true))
+       body:
+        (compound_statement
+         (variable_declaration
+           name: (identifier)
+           value: (string))
+         (function_declaration
+           name: (identifier)
+           parameters: (parameter_list)
+           body: (compound_statement
+                  (print_statement
+                   (identifier))))
+         (return_statement
+          (identifier)))))))
+
+============================================
+Class declaration
+============================================
+
+class Foo {
+  returnSelf() {
+    return Foo;
+  }
+}
+
+---
+
+(program
+ (class_declaration
+   name: (identifier)
+   body: (class_body
+          (method_definition
+            name: (identifier)
+            parameters: (parameter_list)
+            body: (compound_statement
+                   (return_statement
+                    (identifier)))))))
+
+============================================
+Class declaration with superclass
+============================================
+
+class Bar < Foo {
+  inBar() {
+    print "in bar";
+  }
+}
+
+---
+
+(program
+ (class_declaration
+   name: (identifier)
+   superclass: (superclass
+                (identifier))
+   body: (class_body
+          (method_definition
+            name: (identifier)
+            parameters: (parameter_list)
+            body: (compound_statement
+                   (print_statement
+                    (string)))))))
+
+============================================
+Subclass call super
+============================================
+
+class Brunch < Breakfast {
+  init(meat, bread, drink) {
+    super.init(meat, bread);
+    this.drink = drink;
+  }
+}
+
+---
+
+(program
+ (class_declaration
+   name: (identifier)
+   superclass: (superclass
+                (identifier))
+   body: (class_body
+          (method_definition
+            name: (identifier)
+            parameters: (parameter_list
+                         (identifier)
+                         (identifier)
+                         (identifier))
+            body: (compound_statement
+                   (expression_statement
+                    (call_expression
+                      function: (super_expression
+                                 (identifier))
+                      arguments: (argument_list
+                                  (identifier)
+                                  (identifier))))
+                   (expression_statement
+                    (binary_expression
+                      left: (member_expression
+                        object: (this)
+                        field: (field
+                          name: (identifier)))
+                      right: (identifier))))))))
+
+============================================
+Assignment to this member
+============================================
+
+class Foo {
+  init(a, b) {
+    this.a = a;
+    this.b = b;
+  }
+}
+
+---
+
+(program
+  (class_declaration
+    name: (identifier)
+    body: (class_body
+      (method_definition
+        name: (identifier)
+        parameters: (parameter_list
+          (identifier)
+          (identifier))
+        body: (compound_statement
+          (expression_statement
+            (binary_expression
+              left: (member_expression
+                object: (this)
+                field: (field
+                  name: (identifier)))
+              right: (identifier)))
+          (expression_statement
+            (binary_expression
+              left: (member_expression
+                object: (this)
+                field: (field
+                  name: (identifier)))
+              right: (identifier))))))))

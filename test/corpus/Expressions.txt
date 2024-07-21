@@ -1,0 +1,132 @@
+============================================
+Simple Expressions
+============================================
+
+print 1 - 1;
+print 1 -1;
+
+---
+
+(program
+ (print_statement
+  (binary_expression
+    left: (number)
+    right: (number)))
+ (print_statement
+  (binary_expression
+    left: (number)
+    right: (number))))
+
+
+============================================
+Operator Precedence
+============================================
+
+// * has higher precedence than + => 14
+print 2 + 3 * 4; 
+
+// / has higher precedence than - => 0
+print 2 - 6 / 3;
+
+// < has higher precedence than == => true
+print false == 2 < 1;
+
+// <= has higher precedence than == => true
+print false == 2 <= 1;
+
+---
+
+(program
+ (comment)
+ (print_statement
+  (binary_expression
+    left: (number)
+    right: (binary_expression
+      left: (number)
+      right: (number))))
+ (comment)
+ (print_statement
+  (binary_expression
+    left: (number)
+    right: (binary_expression
+      left: (number)
+      right: (number))))
+ (comment)
+ (print_statement
+  (binary_expression
+    left: (false)
+    right: (binary_expression
+      left: (number)
+      right: (number))))
+ (comment)
+ (print_statement
+  (binary_expression
+    left: (false)
+    right: (binary_expression
+      left: (number)
+      right: (number)))))
+
+
+============================================
+Parenthesized Exressions
+============================================
+
+print (2 * (6 - (2 + 2))); // expect: 4
+
+---
+
+(program
+ (print_statement
+  (parenthesized_expression
+   (binary_expression
+     left: (number)
+     right:
+      (parenthesized_expression
+       (binary_expression
+         left: (number)
+         right:
+          (parenthesized_expression
+           (binary_expression
+             left: (number)
+             right: (number))))))))
+ (comment))
+
+
+============================================
+Function Call
+============================================
+
+print f(1, abba, "", g());
+
+---
+
+(program
+ (print_statement
+  (call_expression
+    function: (identifier)
+    arguments:
+     (argument_list
+      (number)
+      (identifier)
+      (string)
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list))))))
+
+============================================
+Call member function
+============================================
+
+benedict.serve("Noble Reader");
+
+---
+
+(program
+ (expression_statement
+  (call_expression
+    function: (member_expression
+      object: (identifier)
+      field: (field
+        name: (identifier)))
+    arguments: (argument_list
+                (string)))))
