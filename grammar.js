@@ -221,10 +221,11 @@ module.exports = grammar({
 
     member_expression: $ => prec('member', seq(
       field('object', $.primary_expression),
-      field('field', $.field),
+      '.',
+      field('property', $.identifier),
     )),
 
-    field: $ => prec('member', seq('.', field('name', $.identifier))),
+    // field: $ => seq('.', field('name', $.identifier)),
 
     string: $ => seq('"', /[^"]*/, '"'),
 

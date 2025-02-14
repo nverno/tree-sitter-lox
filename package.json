@@ -1,6 +1,6 @@
 {
   "name": "@nverno/tree-sitter-lox",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lox grammar for tree-sitter",
   "keywords": [
     "parser",

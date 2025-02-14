@@ -345,22 +345,6 @@
     }
   },
   {
-    "type": "field",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "for_clause",
     "named": true,
     "fields": {
@@ -502,22 +486,22 @@
     "type": "member_expression",
     "named": true,
     "fields": {
-      "field": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "field",
-            "named": true
-          }
-        ]
-      },
       "object": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "primary_expression",
+            "named": true
+          }
+        ]
+      },
+      "property": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
