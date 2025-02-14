@@ -126,7 +126,6 @@ benedict.serve("Noble Reader");
   (call_expression
     function: (member_expression
       object: (identifier)
-      field: (field
-        name: (identifier)))
+      property: (identifier))
     arguments: (argument_list
                 (string)))))
