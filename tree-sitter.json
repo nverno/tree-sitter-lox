@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "lox",
+      "camelcase": "Lox",
+      "title": "Lox",
+      "scope": "source.lox",
+      "file-types": [
+        "lox"
+      ],
+      "injection-regex": "^lox$",
+      "class-name": "TreeSitterLox"
+    }
+  ],
+  "metadata": {
+    "version": "1.2.1",
+    "license": "GPL-3.0-or-later",
+    "description": "Lox grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Noah Peart",
+        "email": "noah.v.peart@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/nverno/tree-sitter-lox"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

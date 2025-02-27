@@ -1,6 +1,6 @@
 {
   "name": "@nverno/tree-sitter-lox",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Lox grammar for tree-sitter",
   "keywords": [
     "parser",
@@ -41,13 +41,13 @@
     "web": "npm run build:wasm && npx tree-sitter web-ui"
   },
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.3.1",
+    "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
-    "node-gyp": "^10.2.0",
-    "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.22.6"
+    "node-gyp": "^11.1.0",
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.2"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
